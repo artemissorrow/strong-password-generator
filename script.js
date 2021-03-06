@@ -2,38 +2,47 @@
 var generateBtn = document.querySelector("#generate");
 
 var charNum;
+var result;
 var charSet = "";
 var lowercase = "abcdefghijklmnopqrstuvwxyz";
 var uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var numbers = "0123456789";
 var specialCharacters = "!#$%&'()*+,-./:;<=>?@[]^_`{|}~";
 
-function setUp() {
-var charNum = prompt("How many characters does your password need?", "min. 8 - max. 128")
-if (charNum == null || charNum == "" || charNum < 8 || charNum > 128) {
-  alert("Error: please enter a number from 8 to 128")
-  var charNum = prompt("How many characters does your password need?", "min. 8 - max. 128")
-} 
-
-if (confirm("Should it include lowercase letters?")) {
-  charSet += lowercase;
-} 
-if (confirm("Include uppercase letters?")) {
-  charSet += uppercase;
-}
-if (confirm("Include numbers?")) {
-  charSet += numbers;
-}
-if (confirm("Include special characters?")) {
-  charSet += specialCharacters;
-}
-if (charSet == "") {
-  alert("Error: password must contain letters, numbers, or special characters")
-}
-console.log(charSet);
-}
-
+// get password criteria from user, starting with length
 function generatePassword() {
+  var charNum = prompt("How many characters does your password need?", "min. 8 - max. 128")
+  if (charNum == null || charNum == "" || charNum < 8 || charNum > 128) {
+    alert("Error: please enter a number from 8 to 128")
+    var charNum = prompt("How many characters does your password need?", "min. 8 - max. 128")
+  }
+
+  if (confirm("Should it include lowercase letters?")) {
+    charSet += lowercase;
+  }
+  if (confirm("Include uppercase letters?")) {
+    charSet += uppercase;
+  }
+  if (confirm("Include numbers?")) {
+    charSet += numbers;
+  }
+  if (confirm("Include special characters?")) {
+    charSet += specialCharacters;
+  }
+  //validate input
+  if (charSet == "") {
+    alert("Error: password must contain letters, numbers, or special characters")
+  }
+
+  //generate random string using input above
+  function randomize(length) {
+    result = "";
+    for (var i = 0, n = charSet.length; i < charNum; i++) {
+      result += charSet.charAt(Math.floor(Math.random() * n));
+    }
+  }
+
+  randomize(charNum);
 
 }
 
@@ -47,7 +56,7 @@ function writePassword() {
 }
 
 // Add event listener to generate button
-generateBtn.addEventListener("click", setUp, writePassword);
+generateBtn.addEventListener("click", writePassword);
 
 
 
