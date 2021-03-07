@@ -20,7 +20,7 @@ function generatePassword() {
 
   if (confirm("Should it include lowercase letters?")) {
     charSet += lowercase;
-  }
+  } 
   if (confirm("Include uppercase letters?")) {
     charSet += uppercase;
   }
@@ -47,8 +47,8 @@ function generatePassword() {
 
   randomize(charNum);
 
-  console.log(result);
-
+// reset the string so we can start from scratch without reloading
+  charSet = "";
 }
 
 // Write password to the #password input
@@ -56,7 +56,9 @@ function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
+  password = result;
   passwordText.value = password;
+  
 
 
 }
