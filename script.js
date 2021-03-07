@@ -10,6 +10,7 @@ var numbers = "0123456789";
 var specialCharacters = "!#$%&'()*+,-./:;<=>?@[]^_`{|}~";
 
 // get password criteria from user, starting with length
+// if length is outside the desired range, it loops around and asks again
 function generatePassword() {
   window.charNum = prompt("How many characters does your password need?", "min. 8 - max. 128")
 
@@ -18,6 +19,7 @@ function generatePassword() {
     window.charNum = prompt("How many characters does your password need?", "min. 8 - max. 128")
   }
 
+// these confirms build the string the randomize function will pull from
   if (confirm("Should it include lowercase letters?")) {
     charSet += lowercase;
   } 
@@ -31,16 +33,17 @@ function generatePassword() {
     charSet += specialCharacters;
   }
 
-  //validate input
+  //validate input - if nothig is selected above, error message displays
   if (charSet == "") {
     alert("Error: password must contain letters, numbers, or special characters")
   }
 
-  //generate random string using input above
+  //generate random string using input above - for loop runs through the 
+  // string established above until the new string is the desired length
   function randomize(length) {
     window.result = "";
-    for (var i = 0, n = charSet.length; i < charNum; i++) {
-      result += charSet.charAt(Math.floor(Math.random() * n));
+    for (var i = 0; i < charNum; i++) {
+      result += charSet.charAt(Math.floor(Math.random() * charSet.length));
     }
     return result;
   }
