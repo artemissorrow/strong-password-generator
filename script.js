@@ -13,9 +13,9 @@ var specialCharacters = "!#$%&'()*+,-./:;<=>?@[]^_`{|}~";
 function generatePassword() {
   window.charNum = prompt("How many characters does your password need?", "min. 8 - max. 128")
 
-  if (charNum == null || charNum == "" || charNum < 8 || charNum > 128) {
+  while (charNum == "" || charNum < 8 || charNum > 128) {
     alert("Error: please enter a number from 8 to 128")
-    var charNum = prompt("How many characters does your password need?", "min. 8 - max. 128")
+    window.charNum = prompt("How many characters does your password need?", "min. 8 - max. 128")
   }
 
   if (confirm("Should it include lowercase letters?")) {
@@ -59,7 +59,7 @@ function writePassword() {
   passwordText.value = password;
 
 
-} 
+}
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
